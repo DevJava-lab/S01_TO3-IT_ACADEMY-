@@ -1,8 +1,7 @@
 package Exercici2;
 
-import java.util.Objects;
 
-public class Restaurant {
+public class Restaurant implements Comparable<Restaurant> {
 
 	private String nom;
 	private int puntuacio;
@@ -10,24 +9,6 @@ public class Restaurant {
 	public Restaurant(String nom, int puntuacio) {
 		this.nom = nom;
 		this.puntuacio = puntuacio;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-
-		Restaurant rest = (Restaurant) obj;
-
-		if (rest.getNom().equals(nom) && rest.puntuacio == puntuacio)
-			return true;
-		else
-			return false;
-
-	}
-
-	@Override
-	public int hashCode() {
-
-		return Objects.hash(nom,puntuacio);
 	}
 
 	public String getNom() {
@@ -47,10 +28,18 @@ public class Restaurant {
 	}
 
 	@Override
-	public String toString() {
-		
-		return "Nom restaurant= " + nom + " ,  Puntuació = " + puntuacio ;
+	public int compareTo(Restaurant o) {
+
+		if (nom.compareTo(o.getNom()) != 0)
+			return nom.compareTo(o.getNom());
+		else
+			return o.getPuntuacio()-puntuacio;
 	}
 
-	
+	@Override
+	public String toString() {
+
+		return "Nom restaurant= " + nom + " ,  Puntuació = " + puntuacio;
+	}
+
 }
